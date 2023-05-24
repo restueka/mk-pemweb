@@ -28,10 +28,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Book
     Route::delete('books/destroy', 'BookController@massDestroy')->name('books.massDestroy');
     Route::resource('books', 'BookController');
+
+     // Pelanggan
+     Route::delete('pelanggan/destroy', 'PelangganController@massDestroy')->name('pelanggan.massDestroy');
+     Route::resource('pelanggan', 'PelangganController');
+
+     // Restu Eka Putri - NIM: 20210801042
+    // Pelanggan
+    Route::post('pelanggan/tables', [PelangganController::class, 'makeDataTables'])->name('pelanggan.tables');
+    Route::delete('pelanggan/destroy', [PelangganController::class, 'massDestroy'])->name('pelanggan.massDestroy');
+    Route::resource('pelanggan', 'PelangganController');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
-    // Change password
-    if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
+     // Change password
+     if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
         Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
         Route::post('password', 'ChangePasswordController@update')->name('password.update');
         Route::post('profile', 'ChangePasswordController@updateProfile')->name('password.updateProfile');
